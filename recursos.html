@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursos e Dicas - Guia Prático de Programação</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #185FA5;
+            --primary-light: #85B7EB;
+            --primary-dark: #0C447C;
+            --secondary: #639922;
+            --accent: #BA7517;
+            --success: #0F6E56;
+            --danger: #E24B4A;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #2c2c2a;
+            --text-gray: #5f5e5a;
+            --border-color: #d3d1c7;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f0f0f0 100%);
+            min-height: 100vh;
+        }
+        
+        /* Menu de Navegação */
+        nav {
+            background: var(--primary-dark);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        nav ul {
+            list-style: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--secondary) 0%, #4a7216 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .tip-card {
+            background: var(--bg-white);
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .tip-card.theory {
+            border-left-color: var(--primary);
+        }
+        
+        .tip-card.practice {
+            border-left-color: var(--success);
+        }
+        
+        .tip-card.warning {
+            border-left-color: var(--danger);
+        }
+        
+        .tip-card h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .tip-icon {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .resource-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+        
+        .resource-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .resource-type {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .resource-type.plataforma {
+            background: #E8F5E9;
+            color: var(--success);
+        }
+        
+        .resource-type.comunidade {
+            background: #FCE4EC;
+            color: #C2185B;
+        }
+        
+        .resource-type.ferramenta {
+            background: #FFF3E0;
+            color: var(--accent);
+        }
+        
+        .resource-description {
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        
+        .resource-link {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.6rem 1rem;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .resource-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .tips-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+        }
+        
+        .comparison-table th {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem;
+        }
+        
+        .comparison-table tr:hover {
+            background: var(--bg-light);
+        }
+        
+        .highlight-box {
+            background: #FFF9E6;
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        
+        .highlight-box strong {
+            color: var(--accent);
+        }
+        
+        .code-example {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        a.btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        footer p {
+            margin: 0.5rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav ul {
+                gap: 0.5rem;
+            }
+            
+            nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+      </style>
+</head>
+<body>
+    <!-- Menu de Navegação -->
+    <nav>
+        <ul>
+            <li><a href="Index.html">🏠 Início</a></li>
+            <li><a href="programacao-basico.html">📚 Básico</a></li>
+            <li><a href="programacao-intermediaria.html">⚡ Intermediário</a></li>
+            <li><a href="programacao-avancada.html">🔥 Avançado</a></li>
+            <li><a href="recursos.html">💡 Recursos</a></li>
+        </ul>
+    </nav>
+    
+    <header>
+        <h1>💡 Recursos e Dicas</h1>
+        <p>Dicas Práticas, Teóricas e Sites que Vão Acelerar seu Aprendizado</p>
+    </header>
+    
+    <div class="container">
+        <!-- Seção de Dicas Práticas -->
+        <section>
+            <h2>🎯 Dicas Práticas para Programadores</h2>
+            
+            <div class="tip-card practice">
+                <h4>1. Comece Pequeno e Iterativamente</h4>
+                <p>Não tente construir projetos enormes de primeira. Comece com scripts simples de 10-20 linhas e vá aumentando a complexidade gradualmente. Cada projeto pequeno é uma vitória que te motiva.</p>
+            </div>
+            
+            <div class="tip-card practice">
+                <h4>2. Leia Código de Outros</h4>
+                <p>Busque projetos open source no GitHub que você admira. Ler código bem escrito é uma das melhores formas de aprender. Você verá padrões, estruturas e soluções criativas que não aprenderia sozinho.</p>
+            </div>
+            
+            <div class="tip-card practice">
+                <h4>3. Use o Debugger, Não prints()</h4>
+                <p>Ao invés de usar <code>print()</code> para debugar, aprenda a usar o debugger da sua IDE. Pause a execução, veja variáveis em tempo real, e "step through" o código. Muito mais eficiente!</p>
+            </div>
+            
+            <div class="tip-card practice">
+                <h4>4. Pratique Algoritmos Diariamente</h4>
+                <p>Dedique 15-30 minutos por dia a resolver problemas de programação. Sites como LeetCode e HackerRank têm problemas ranqueados por dificuldade. Mesmo problemas fáceis fortalecem seu raciocínio lógico.</p>
+            </div>
+            
+            <div class="tip-card practice">
+                <h4>5. Escreva Testes Enquanto Codifica</h4>
+                <p>Não deixe testes para o final! Escreva testes unitários junto com seu código. Isso evita bugs, documenta o comportamento esperado e te dá confiança ao refatorar.</p>
+            </div>
+            
+            <div class="tip-card practice">
+                <h4>6. Version Control é Seu Amigo</h4>
+                <p>Use Git desde o primeiro projeto, mesmo que seja pessoal. Commit frequentemente com mensagens descritivas. Você vai agradecer a si mesmo quando precisar voltar meses no tempo.</p>
+            </div>
+        </section>
+        
+        <!-- Seção de Dicas Teóricas -->
+        <section>
+            <h2>🧠 Dicas Teóricas e Conceitos Importantes</h2>
+            
+            <div class="tip-card theory">
+                <h4>1. Programação é Resolução de Problemas, Não Memorização</h4>
+                <p>Você não precisa memorizar sintaxe. O importante é entender COMO um conceito funciona e QUANDO usá-lo. A sintaxe você consulta no Google quando precisa.</p>
+            </div>
+            
+            <div class="tip-card theory">
+                <h4>2. DRY - Don't Repeat Yourself</h4>
+                <p>Se você escreve a mesma coisa 2 ou 3 vezes, é hora de criar uma função ou classe. Código duplicado é uma dívida técnica que vai te cobrar juros depois.</p>
+            </div>
+            
+            <div class="tip-card theory">
+                <h4>3. Legibilidade é Mais Importante que Inteligência</h4>
+                <p>Um código que qualquer pessoa consegue entender é melhor que um código "inteligente" que só você entende. Código é lido 10x mais que é escrito. Priorize clareza.</p>
+            </div>
+            
+            <div class="tip-card theory">
+                <h4>4. Entenda a Diferença Entre Compilado e Interpretado</h4>
+                <p>Linguagens compiladas (C, Java) são traduzidas antes de rodar. Linguagens interpretadas (Python, JavaScript) são traduzidas enquanto rodam. Cada uma tem vantagens e desvantagens.</p>
+            </div>
+            
+            <div class="tip-card theory">
+                <h4>5. Big O (Complexidade) Importa</h4>
+                <p>Um algoritmo O(n) é mais rápido que O(n²) em dados grandes. Aprenda a analisar complexidade de tempo e espaço. Isso faz a diferença entre um app que roda em 1 segundo ou em 1 minuto.</p>
+            </div>
+            
+            <div class="tip-card theory">
+                <h4>6. Sempre Há Mais de Uma Maneira de Resolver</h4>
+                <p>Na programação, raramente existe uma única solução "correta". Explore diferentes abordagens. Compare em termos de performance, legibilidade e manutenibilidade.</p>
+            </div>
+        </section>
+        
+        <!-- Seção de Erros Comuns -->
+        <section>
+            <h2>⚠️ Erros Comuns a Evitar</h2>
+            
+            <div class="tip-card warning">
+                <h4>❌ Erro 1: Não Testar Seu Código</h4>
+                <p>Escrever código e não testá-lo é como construir uma casa sem inspeção. Bugs aparecem sempre em produção se você não testar antes.</p>
+            </div>
+            
+            <div class="tip-card warning">
+                <h4>❌ Erro 2: Ignorar Mensagens de Erro</h4>
+                <p>Mensagens de erro são seu amigo! Leia-as cuidadosamente. Elas dizem exatamente o que deu errado e em qual linha. Não ignore ou pule para outra solução.</p>
+            </div>
+            
+            <div class="tip-card warning">
+                <h4>❌ Erro 3: Copiar Código Sem Entender</h4>
+                <p>Stackoverflow é ótimo, mas copiar código sem entender é perigoso. Você pode copiar uma solução que funciona para um caso, mas quebra no seu. Sempre leia e entenda antes de usar.</p>
+            </div>
+            
+            <div class="tip-card warning">
+                <h4>❌ Erro 4: Não Fazer Backup / Commit do Código</h4>
+                <p>Perder seu código por falta de backup é dói. Use Git, Google Drive, ou qualquer solução. Faça commits frequentemente como checkpoints.</p>
+            </div>
+            
+            <div class="tip-card warning">
+                <h4>❌ Erro 5: Pular Conceitos Fundamentais</h4>
+                <p>Tentar aprender frameworks avançados sem dominar o básico é como construir uma casa pela cobertura. Você vai ficar perdido e frustrado. Consolide o básico primeiro.</p>
+            </div>
+        </section>
+        
+        <!-- Seção de Plataformas e Sites -->
+        <section>
+            <h2>🌐 Plataformas e Sites Recomendados</h2>
+            
+            <h3>📚 Plataformas de Aprendizado</h3>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <span class="resource-type plataforma">Plataforma</span>
+                    <h4>Codecademy</h4>
+                    <p class="resource-description">Cursos interativos com exercícios práticos. Aprenda Python, JavaScript, HTML/CSS em um ambiente gamificado.</p>
+                    <a href="https://www.codecademy.com" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type plataforma">Plataforma</span>
+                    <h4>freeCodeCamp</h4>
+                    <p class="resource-description">Cursos completamente gratuitos. Desde HTML/CSS até React, Node.js e muito mais. Certificados reconhecidos.</p>
+                    <a href="https://www.freecodecamp.org" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type plataforma">Plataforma</span>
+                    <h4>Udemy</h4>
+                    <p class="resource-description">Cursos da comunidade com dezenas de tópicos. Procure por cursos bem avaliados e com muitos alunos.</p>
+                    <a href="https://www.udemy.com" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type plataforma">Plataforma</span>
+                    <h4>Khan Academy</h4>
+                    <p class="resource-description">Excelente para fundamentos e matemática. Vídeos curtos e diretos que explicam bem conceitos.</p>
+                    <a href="https://www.khanacademy.org" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type plataforma">Plataforma</span>
+                    <h4>Coursera</h4>
+                    <p class="resource-description">Cursos de universidades de topo. Um pouco mais formais e estruturados. Certificados com valor.</p>
+                    <a href="https://www.coursera.org" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type plataforma">Plataforma</span>
+                    <h4>Alura (BR)</h4>
+                    <p class="resource-description">Plataforma brasileira com cursos em português. Comunidade brasileira ativa e suporte em português.</p>
+                    <a href="https://www.alura.com.br" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+            </div>
+            
+            <h3>🛠️ Ferramentas Essenciais</h3>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <span class="resource-type ferramenta">Ferramenta</span>
+                    <h4>VS Code</h4>
+                    <p class="resource-description">Editor de código mais popular e leve. Extensões infinitas. Perfeito para iniciantes e profissionais.</p>
+                    <a href="https://code.visualstudio.com" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type ferramenta">Ferramenta</span>
+                    <h4>GitHub</h4>
+                    <p class="resource-description">Controle de versão e repositório. Essencial para profissionais. Portfólio no GitHub impressiona empregadores.</p>
+                    <a href="https://github.com" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type ferramenta">Ferramenta</span>
+                    <h4>Stack Overflow</h4>
+                    <p class="resource-description">Comunidade de Q&A. Se tem uma dúvida, 99% das chances já foi respondida. Use bem!</p>
+                    <a href="https://stackoverflow.com" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type ferramenta">Ferramenta</span>
+                    <h4>RegexTester</h4>
+                    <p class="resource-description">Ferramenta visual para testar expressões regulares. Salva horas de frustração.</p>
+                    <a href="https://regexr.com" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type ferramenta">Ferramenta</span>
+                    <h4>Postman</h4>
+                    <p class="resource-description">Teste APIs de forma visual. Essencial se trabalha com backend ou APIs.</p>
+                    <a href="https://www.postman.com" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type ferramenta">Ferramenta</span>
+                    <h4>DevDocs</h4>
+                    <p class="resource-description">Documentação offline de linguagens, frameworks e bibliotecas. Acesso rápido sem internet.</p>
+                    <a href="https://devdocs.io" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+            </div>
+            
+            <h3>👥 Comunidades e Fóruns</h3>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <span class="resource-type comunidade">Comunidade</span>
+                    <h4>Dev.to</h4>
+                    <p class="resource-description">Comunidade de desenvolvedores. Artigos, discussões e networking. Ambiente acolhedor.</p>
+                    <a href="https://dev.to" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type comunidade">Comunidade</span>
+                    <h4>Reddit (r/learnprogramming)</h4>
+                    <p class="resource-description">Subreddit dedicado a aprender programação. Perguntas são bem-vindas. Comunidade supportiva.</p>
+                    <a href="https://reddit.com/r/learnprogramming" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type comunidade">Comunidade</span>
+                    <h4>Discord (Comunidades)</h4>
+                    <p class="resource-description">Servidores Discord especializados em linguagens e frameworks. Apoio em tempo real.</p>
+                    <a href="https://discord.com" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+            </div>
+            
+            <h3>⚡ Desafios de Programação</h3>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <span class="resource-type ferramenta">Desafio</span>
+                    <h4>LeetCode</h4>
+                    <p class="resource-description">Problemas de algorítmica ranqueados por dificuldade. Usado em entrevistas técnicas de grandes empresas.</p>
+                    <a href="https://leetcode.com" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type ferramenta">Desafio</span>
+                    <h4>HackerRank</h4>
+                    <p class="resource-description">Desafios de código em várias linguagens. Gamificado com troféus e rankings.</p>
+                    <a href="https://www.hackerrank.com" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type ferramenta">Desafio</span>
+                    <h4>CodeWars</h4>
+                    <p class="resource-description">Desafios gamificados tipo "katas". Progressão visual e comunidade interativa.</p>
+                    <a href="https://www.codewars.com" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <span class="resource-type ferramenta">Desafio</span>
+                    <h4>Project Euler</h4>
+                    <p class="resource-description">Desafios matemáticos que requerem programação. Ótimo para lógica.</p>
+                    <a href="https://projecteuler.net" target="_blank" class="resource-link">Acessar →</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tabela Comparativa -->
+        <section>
+            <h2>📊 Comparação: Qual Plataforma Para Cada Objetivo?</h2>
+            <table class="comparison-table">
+                <tr>
+                    <th>Objetivo</th>
+                    <th>Melhor Plataforma</th>
+                    <th>Por Quê?</th>
+                </tr>
+                <tr>
+                    <td><strong>Aprender Interativo</strong></td>
+                    <td>Codecademy</td>
+                    <td>Exercícios no navegador, feedback imediato</td>
+                </tr>
+                <tr>
+                    <td><strong>Gratuito Completo</strong></td>
+                    <td>freeCodeCamp</td>
+                    <td>Cursos longos e profundos, sem paywall</td>
+                </tr>
+                <tr>
+                    <td><strong>Desafios Algoritmos</strong></td>
+                    <td>LeetCode</td>
+                    <td>Dificuldade bem ranqueada, usado em entrevistas</td>
+                </tr>
+                <tr>
+                    <td><strong>Comunidade Supportiva</strong></td>
+                    <td>Reddit/Discord</td>
+                    <td>Pessoas reais respondendo em tempo real</td>
+                </tr>
+                <tr>
+                    <td><strong>Certificado Profissional</strong></td>
+                    <td>Coursera</td>
+                    <td>Certificados de universidades reconhecidas</td>
+                </tr>
+                <tr>
+                    <td><strong>Português</strong></td>
+                    <td>Alura</td>
+                    <td>Conteúdo todo em português, suporte BR</td>
+                </tr>
+            </table>
+        </section>
+        
+        <!-- Dica Extra -->
+        <div class="highlight-box">
+            <strong>💡 Dica de Ouro:</strong> Não tente aprender em todas as plataformas ao mesmo tempo! Escolha UMA e complete um curso completo nela antes de pular para a próxima. Consistência > Variedade.
+        </div>
+        
+        <!-- Botões de Navegação -->
+        <div class="navigation-buttons">
+            <a href="index.html" class="btn btn-secondary">← Voltar ao Início</a>
+            <a href="basico.html" class="btn btn-primary">Começar os Cursos →</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p><strong>Recursos e Dicas - Accelerando seu Aprendizado em Programação</strong></p>
+        <p style="margin-top: 0.5rem; opacity: 0.9;">Use estes recursos com consistência e você verá progresso notável em poucas semanas!</p>
+        <p style="margin-top: 1.5rem; opacity: 0.8; font-size: 0.9rem;">© 2026 ZyonTech. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

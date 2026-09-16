@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programação - Do Básico ao Avançado</title>
+
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6817349538328296"
+     crossorigin="anonymous"></script>
+
+      <meta name="google-site-verification" content="GGJg_07nM7EnrUHKWwAers55mjFR_cRIq29RZGpq2cI" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #185FA5;
+            --primary-light: #85B7EB;
+            --primary-dark: #0C447C;
+            --secondary: #639922;
+            --accent: #BA7517;
+            --danger: #E24B4A;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #2c2c2a;
+            --text-gray: #5f5e5a;
+            --border-color: #d3d1c7;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f0f0f0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 0.5rem;
+        }
+        
+        header .tagline {
+            font-size: 1rem;
+            opacity: 0.85;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            flex: 1;
+        }
+        
+        .intro-section {
+            background: var(--bg-white);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .intro-section h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .intro-section p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .course-card {
+            background: var(--bg-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        
+        .course-header {
+            padding: 2rem 1.5rem;
+            color: white;
+            text-align: center;
+        }
+        
+        .course-header.basico {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+        }
+        
+        .course-header.intermediario {
+            background: linear-gradient(135deg, var(--secondary) 0%, #4a7216 100%);
+        }
+        
+        .course-header.avancado {
+            background: linear-gradient(135deg, #E8524D 0%, #A82828 100%);
+        }
+        
+        .course-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .course-header .level {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .course-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-body ul {
+            list-style: none;
+            margin: 1rem 0;
+            flex: 1;
+        }
+        
+        .course-body li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-gray);
+        }
+        
+        .course-body li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .course-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .course-footer a {
+            display: block;
+            padding: 0.8rem;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .course-footer .btn-basico {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .course-footer .btn-basico:hover {
+            background: var(--primary-dark);
+        }
+        
+        .course-footer .btn-intermediario {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .course-footer .btn-intermediario:hover {
+            background: #4a7216;
+        }
+        
+        .course-footer .btn-avancado {
+            background: #A82828;
+            color: white;
+        }
+        
+        .course-footer .btn-avancado:hover {
+            background: #7A1F1F;
+        }
+        
+        .features {
+            background: var(--bg-white);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .features h2 {
+            color: var(--primary-dark);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .feature-item .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .feature-item p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+        
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: auto;
+        }
+        
+        footer p {
+            margin: 0.5rem 0;
+        }
+        
+        .footer-link {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+        
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .intro-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🚀 Programação Completa</h1>
+        <p>Do Básico ao Avançado - Aprenda Programação do Zero</p>
+        <div class="tagline">Uma jornada educacional estruturada em 3 níveis</div>
+    </header>
+    
+    <div class="container">
+        <div class="intro-section">
+            <h2>Bem-vindo ao seu Caminho para Programação!</h2>
+            <p>
+                Este guia completo foi desenvolvido para levá-lo do zero até se tornar um desenvolvedor competente.
+                Cada nível foi cuidadosamente estruturado com conceitos fundamentais, exemplos práticos e projetos
+                reais. Escolha seu ponto de partida e comece a aprender agora!
+            </p>
+        </div>
+        
+        <div class="courses-grid">
+            <!-- Curso Básico -->
+            <div class="course-card">
+                <div class="course-header basico">
+                    <h3>📚 Programação Básica</h3>
+                    <div class="level">Nível 1 - Iniciante</div>
+                </div>
+                <div class="course-body">
+                    <p><strong>Aprenda os fundamentos essenciais:</strong></p>
+                    <ul>
+                        <li>Variáveis e tipos de dados</li>
+                        <li>Condições (if/else)</li>
+                        <li>Loops (for/while)</li>
+                        <li>Funções e escopo</li>
+                        <li>Exemplos práticos em Python</li>
+                    </ul>
+                    <p><small>⏱️ Tempo estimado: 4-6 horas</small></p>
+                </div>
+                <div class="course-footer">
+                    <a href="programacao-basico.html" class="btn-basico">Começar →</a>
+                </div>
+            </div>
+            
+            <!-- Curso Intermediário -->
+            <div class="course-card">
+                <div class="course-header intermediario">
+                    <h3>⚡ Intermediário</h3>
+                    <div class="level">Nível 2 - Evolução</div>
+                </div>
+                <div class="course-body">
+                    <p><strong>Expanda suas habilidades:</strong></p>
+                    <ul>
+                        <li>Estruturas de dados (listas, dicionários)</li>
+                        <li>Programação Orientada a Objetos</li>
+                        <li>Tratamento de erros</li>
+                        <li>Manipulação de arquivos</li>
+                        <li>Módulos e bibliotecas</li>
+                    </ul>
+                    <p><small>⏱️ Tempo estimado: 6-8 horas</small></p>
+                </div>
+                <div class="course-footer">
+                    <a href="intermediario.html" class="btn-intermediario">Continuar →</a>
+                </div>
+            </div>
+            
+            <!-- Curso Avançado -->
+            <div class="course-card">
+                <div class="course-header avancado">
+                    <h3>🔥 Avançado</h3>
+                    <div class="level">Nível 3 - Especialização</div>
+                </div>
+                <div class="course-body">
+                    <p><strong>Domine conceitos profissionais:</strong></p>
+                    <ul>
+                        <li>Design Patterns</li>
+                        <li>Testes unitários</li>
+                        <li>Programação funcional</li>
+                        <li>Programação assíncrona</li>
+                        <li>Arquitetura de software</li>
+                    </ul>
+                    <p><small>⏱️ Tempo estimado: 8-10 horas</small></p>
+                </div>
+                <div class="course-footer">
+                    <a href="avancado.html" class="btn-avancado">Explorar →</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h2>✨ Por que este curso é especial?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="icon">💡</div>
+                    <h4>Exemplos Práticos</h4>
+                    <p>Código real em Python que você pode executar e aprender</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🎯</div>
+                    <h4>Bem Estruturado</h4>
+                    <p>3 níveis lógicos do básico até arquitetura profissional</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">📚</div>
+                    <h4>Conteúdo Completo</h4>
+                    <p>Cobre conceitos fundamentais até padrões avançados</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🚀</div>
+                    <h4>Pronto para GitHub</h4>
+                    <p>HTML auto-contido, sem dependências externas</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">📱</div>
+                    <h4>Responsivo</h4>
+                    <p>Funciona perfeitamente em desktop, tablet e mobile</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🎨</div>
+                    <h4>Design Moderno</h4>
+                    <p>Interface intuitiva e agradável de usar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p><strong>Programação Completa - Uma Jornada do Zero ao Profissional</strong></p>
+        <p style="margin-top: 1rem; opacity: 0.9;">Desenvolvido com dedicação para ajudar você a alcançar seus objetivos em programação 🚀</p>
+        <p style="margin-top: 1.5rem; opacity: 0.8; font-size: 0.9rem;">© 2026 ZyonTech. Todos os direitos reservados.</p>
+        <p style="margin-top: 1rem;">
+            <a href="privacidade.html" style="color: var(--primary-light); text-decoration: none; margin: 0 1rem;">Política de Privacidade</a> | 
+            <a href="contato.html" style="color: var(--primary-light); text-decoration: none; margin: 0 1rem;">Contato</a>
+        </p>
+    </footer>
+</body>
+</html>
