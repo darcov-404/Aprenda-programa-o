@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programação Avançada - Dominando o Código</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #185FA5;
+            --primary-light: #85B7EB;
+            --primary-dark: #0C447C;
+            --secondary: #639922;
+            --accent: #BA7517;
+            --success: #0F6E56;
+            --danger: #E24B4A;
+            --warning: #D4A017;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #2c2c2a;
+            --text-gray: #5f5e5a;
+            --border-color: #d3d1c7;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f0f0f0 100%);
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #A82828 0%, #7A1F1F 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        .intro-box {
+            background: linear-gradient(135deg, var(--bg-white) 0%, #fafafa 100%);
+            border-left: 4px solid var(--danger);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        section {
+            margin-bottom: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #7A1F1F;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--danger);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: #A82828;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .concept-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .concept-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .concept-card h4 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .code-block {
+            background: #f5f5f5;
+            border-left: 4px solid #A82828;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            color: #7A1F1F;
+            line-height: 1.5;
+        }
+        
+        .example {
+            background: #f9f9f9;
+            border: 1px dashed var(--border-color);
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border-radius: 6px;
+        }
+        
+        .example-title {
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        a.btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: #A82828;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #7A1F1F;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(168, 40, 40, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-light);
+            color: #A82828;
+            border: 2px solid #A82828;
+        }
+        
+        .btn-secondary:hover {
+            background: #A82828;
+            color: white;
+        }
+        
+        a.btn.btn-primary {
+            background: #A82828;
+            color: white;
+        }
+        
+        a.btn.btn-primary:hover {
+            background: #7A1F1F;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(168, 40, 40, 0.3);
+        }
+        
+        a.btn.btn-secondary {
+            background: var(--bg-light);
+            color: #A82828;
+            border: 2px solid #A82828;
+        }
+        
+        a.btn.btn-secondary:hover {
+            background: #A82828;
+            color: white;
+        }
+        
+        .tips-box {
+            background: #fff3cd;
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        
+        .tips-box strong {
+            color: var(--accent);
+        }
+        
+        .warning-box {
+            background: #ffe4e4;
+            border-left: 4px solid var(--danger);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        
+        .warning-box strong {
+            color: var(--danger);
+        }
+        
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        
+        .success-box strong {
+            color: var(--success);
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        
+        .info-box strong {
+            color: var(--primary-dark);
+        }
+        
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .highlight-card {
+            background: linear-gradient(135deg, #E8524D 0%, #A82828 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(168, 40, 40, 0.2);
+        }
+        
+        .highlight-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight-card p {
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+        
+        .level-badge {
+            display: inline-block;
+            background: var(--danger);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .difficulty-meter {
+            background: var(--bg-light);
+            height: 8px;
+            border-radius: 4px;
+            margin: 0.5rem 0 1rem 0;
+            overflow: hidden;
+        }
+        
+        .difficulty-meter.hard {
+            background: linear-gradient(90deg, var(--danger) 100%, transparent 100%);
+        }
+        
+        .difficulty-meter.expert {
+            background: linear-gradient(90deg, #A82828 100%, transparent 100%);
+        }
+        
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .pattern-item {
+            background: var(--bg-white);
+            border: 2px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .pattern-item:hover {
+            border-color: #A82828;
+            box-shadow: 0 2px 8px rgba(168, 40, 40, 0.15);
+        }
+        
+        .pattern-item h4 {
+            color: #A82828;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .pattern-item p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+        
+        ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background: #7A1F1F;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.1rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🔥 Programação Avançada</h1>
+        <p>Dominando Conceitos Complexos e Arquitetura de Software</p>
+    </header>
+    
+    <div class="breadcrumb">
+        📚 Básico → Intermediário → <strong>Avançado</strong>
+    </div>
+    
+    <div class="container">
+        <div class="intro-box">
+            <span class="level-badge">Nível 3 - Avançado</span>
+            <h3>Você está no topo da pirâmide! 🏔️</h3>
+            <p>Neste nível, você aprenderá conceitos sofisticados que separam desenvolvedores júniores de sêniors. Vamos explorar padrões de design, otimização, testes, concorrência e muito mais. Prepare-se: este é conteúdo desafiador, mas extremamente valioso.</p>
+        </div>
+        
+        <section>
+            <h2>🎨 Design Patterns - Soluções Comprovadas</h2>
+            
+            <h3>O que são Design Patterns?</h3>
+            <div class="concept-card">
+                <h4>Padrões de Design Reutilizáveis</h4>
+                <p>Design Patterns são soluções testadas e aprovadas para problemas comuns em programação. Aprender padrões te torna mais produtivo e seu código mais profissional.</p>
+                
+                <div class="difficulty-meter hard"></div>
+                
+                <div class="pattern-grid">
+                    <div class="pattern-item">
+                        <h4>Singleton</h4>
+                        <p>Garante que apenas uma instância da classe existe em toda a aplicação.</p>
+                    </div>
+                    <div class="pattern-item">
+                        <h4>Factory</h4>
+                        <p>Cria objetos sem especificar exatamente quais classes usar.</p>
+                    </div>
+                    <div class="pattern-item">
+                        <h4>Observer</h4>
+                        <p>Define dependências entre objetos, notificando quando estado muda.</p>
+                    </div>
+                    <div class="pattern-item">
+                        <h4>Strategy</h4>
+                        <p>Encapsula algoritmos para torná-los intercambiáveis.</p>
+                    </div>
+                    <div class="pattern-item">
+                        <h4>Adapter</h4>
+                        <p>Converte interface de um objeto para outra que clientes esperam.</p>
+                    </div>
+                    <div class="pattern-item">
+                        <h4>Decorator</h4>
+                        <p>Adiciona responsabilidades a objetos dinamicamente.</p>
+                    </div>
+                </div>
+                
+                <div class="example">
+                    <div class="example-title">Exemplo: Padrão Singleton</div>
+                    <div class="code-block">
+class Database:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;_instance = None<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def __new__(cls):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if cls._instance is None:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cls._instance = super().__new__(cls)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return cls._instance<br>
+<br>
+db1 = Database()<br>
+db2 = Database()<br>
+print(db1 is db2)  # True - mesma instância!
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>🧪 Testes Unitários - Código Confiável</h2>
+            
+            <h3>Por que testar código?</h3>
+            <div class="concept-card">
+                <h4>Garantindo Qualidade</h4>
+                <p>Testes verificam se seu código funciona como esperado. Profissionais escrevem testes para garantir que mudanças futuras não quebrem nada.</p>
+                
+                <div class="info-box">
+                    <strong>📌 Conceito:</strong> TDD (Test-Driven Development) = Escrever testes ANTES do código.
+                </div>
+                
+                <div class="example">
+                    <div class="example-title">Exemplo com unittest:</div>
+                    <div class="code-block">
+import unittest<br>
+<br>
+def calcular_desconto(preco, percentual):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return preco * (1 - percentual / 100)<br>
+<br>
+class TestDesconto(unittest.TestCase):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def test_desconto_10_porcento(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resultado = calcular_desconto(100, 10)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.assertEqual(resultado, 90)<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def test_desconto_invalido(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resultado = calcular_desconto(100, 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.assertEqual(resultado, 100)<br>
+<br>
+if __name__ == '__main__':<br>
+&nbsp;&nbsp;&nbsp;&nbsp;unittest.main()
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <strong>💡 Dica:</strong> Teste casos normais, casos extremos (0, valores negativos) e erros.
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>⚡ Programação Funcional - Novo Paradigma</h2>
+            
+            <h3>Funções de Ordem Superior</h3>
+            <div class="concept-card">
+                <h4>Map, Filter e Lambda</h4>
+                <p>Programação funcional trata funções como objetos de primeira classe. Permite código mais conciso e elegante.</p>
+                
+                <div class="example">
+                    <div class="example-title">Lambda e Map:</div>
+                    <div class="code-block">
+numeros = [1, 2, 3, 4, 5]<br>
+<br>
+# Multiplicar cada número por 2<br>
+resultado = list(map(lambda x: x * 2, numeros))<br>
+print(resultado)  # [2, 4, 6, 8, 10]<br>
+<br>
+# Filtrar apenas números pares<br>
+pares = list(filter(lambda x: x % 2 == 0, numeros))<br>
+print(pares)  # [2, 4]
+                    </div>
+                </div>
+                
+                <div class="example">
+                    <div class="example-title">Reduce (acumular):</div>
+                    <div class="code-block">
+from functools import reduce<br>
+<br>
+numeros = [1, 2, 3, 4, 5]<br>
+<br>
+# Somar todos os números<br>
+soma = reduce(lambda x, y: x + y, numeros)<br>
+print(soma)  # 15
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>🔄 Decoradores - Modificando Comportamento</h2>
+            
+            <h3>Funções que modificam funções</h3>
+            <div class="concept-card">
+                <h4>Decoradores Avançados</h4>
+                <p>Decoradores são funções que modificam ou melhoram outras funções sem alterar seu código original. Muito usados em frameworks como Django e Flask.</p>
+                
+                <div class="difficulty-meter expert"></div>
+                
+                <div class="example">
+                    <div class="example-title">Decorador simples:</div>
+                    <div class="code-block">
+def cronometro(func):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def wrapper(*args, **kwargs):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inicio = time.time()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resultado = func(*args, **kwargs)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;duracao = time.time() - inicio<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"Executado em {duracao:.4f}s")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return resultado<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return wrapper<br>
+<br>
+@cronometro<br>
+def tarefa_lenta():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;time.sleep(2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Pronto!"<br>
+<br>
+tarefa_lenta()
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>⚙️ Generators e Context Managers</h2>
+            
+            <h3>Generators - Economizando Memória</h3>
+            <div class="concept-card">
+                <h4>Produzindo valores sob demanda</h4>
+                <p>Generators geram valores um de cada vez, economizando memória. Perfeito para trabalhar com grandes volumes de dados.</p>
+                
+                <div class="example">
+                    <div class="example-title">Generator vs Lista:</div>
+                    <div class="code-block">
+# Lista - aloca toda na memória<br>
+def numeros_lista(n):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;resultado = []<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for i in range(n):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resultado.append(i)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return resultado<br>
+<br>
+# Generator - aloca sob demanda<br>
+def numeros_generator(n):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for i in range(n):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield i<br>
+<br>
+# Generator usa muito menos memória!<br>
+gen = numeros_generator(1000000)
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Context Managers - With Statement</h3>
+            <div class="concept-card">
+                <h4>Gerenciando Recursos Automaticamente</h4>
+                <p>Context managers garantem que recursos sejam liberados corretamente, mesmo se erros ocorrerem.</p>
+                
+                <div class="example">
+                    <div class="example-title">Context Manager customizado:</div>
+                    <div class="code-block">
+class Arquivo:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, nome, modo):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.nome = nome<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.modo = modo<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def __enter__(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.arquivo = open(self.nome, self.modo)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self.arquivo<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def __exit__(self, exc_type, exc_val, exc_tb):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.arquivo.close()<br>
+<br>
+# Uso: arquivo fecha automaticamente<br>
+with Arquivo("dados.txt", "r") as f:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;conteudo = f.read()
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>🚀 Programação Assíncrona - Concorrência</h2>
+            
+            <h3>Async/Await - Múltiplas Tarefas Simultaneamente</h3>
+            <div class="concept-card">
+                <h4>Programação Não-Bloqueante</h4>
+                <p>Async permite que o programa faça múltiplas tarefas "ao mesmo tempo" sem travar. Essencial para aplicações web e APIs.</p>
+                
+                <div class="warning-box">
+                    <strong>⚠️ Complexo:</strong> Este é um dos tópicos mais difíceis. Recomenda-se dominar o resto primeiro.
+                </div>
+                
+                <div class="example">
+                    <div class="example-title">Async/Await básico:</div>
+                    <div class="code-block">
+import asyncio<br>
+<br>
+async def buscar_dados(url):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(f"Buscando {url}...")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;await asyncio.sleep(2)  # Simula requisição<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return f"Dados de {url}"<br>
+<br>
+async def main():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;# Executa 3 tarefas "simultaneamente"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;resultados = await asyncio.gather(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buscar_dados("api1.com"),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buscar_dados("api2.com"),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buscar_dados("api3.com")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(resultados)<br>
+<br>
+asyncio.run(main())
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>📈 Performance e Otimização</h2>
+            
+            <h3>Escrevendo Código Eficiente</h3>
+            <div class="concept-card">
+                <h4>Técnicas de Otimização</h4>
+                <p>Código lindo é importante, mas código rápido também. Aprenda a identificar gargalos e otimizá-los.</p>
+                
+                <div class="tips-box">
+                    <strong>💡 Princípio:</strong> "Premature optimization is the root of all evil" - Donald Knuth. Otimize apenas o que é lento!
+                </div>
+                
+                <div class="example">
+                    <div class="example-title">Memoization - Cachear resultados:</div>
+                    <div class="code-block">
+from functools import lru_cache<br>
+<br>
+@lru_cache(maxsize=None)<br>
+def fibonacci(n):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if n < 2:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return n<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return fibonacci(n-1) + fibonacci(n-2)<br>
+<br>
+# Muito mais rápido que sem cache!<br>
+print(fibonacci(35))
+                    </div>
+                </div>
+                
+                <div class="example">
+                    <div class="example-title">Profiling - Descobrir gargalos:</div>
+                    <div class="code-block">
+import cProfile<br>
+<br>
+def minha_funcao():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;# código lento<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+<br>
+# Medir tempo de execução<br>
+cProfile.run('minha_funcao()')
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>🏛️ Arquitetura de Software</h2>
+            
+            <h3>Estruturando Grandes Projetos</h3>
+            <div class="concept-card">
+                <h4>Separação de Responsabilidades</h4>
+                <p>Quando projetos crescem, organizá-los bem é crucial. Vários padrões ajudam nisso.</p>
+                
+                <div class="example">
+                    <div class="example-title">MVC - Model View Controller:</div>
+                    <div class="code-block">
+# Model - Dados<br>
+class Usuario:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, nome, email):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.nome = nome<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.email = email<br>
+<br>
+# Controller - Lógica<br>
+class UsuarioController:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def criar_usuario(self, nome, email):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Usuario(nome, email)<br>
+<br>
+# View - Apresentação<br>
+def exibir_usuario(usuario):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(f"Nome: {usuario.nome}")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(f"Email: {usuario.email}")
+                    </div>
+                </div>
+                
+                <div class="success-box">
+                    <strong>✓ Benefício:</strong> Cada camada tem uma responsabilidade clara. Mudanças em uma não afetam as outras.
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>💼 Projeto Prático Avançado - API REST Completa</h2>
+            <div class="concept-card">
+                <h4>Construindo uma API com Framework</h4>
+                
+                <div class="success-box">
+                    <strong>✓ O que o projeto faz:</strong> API completa com autenticação, banco de dados, testes e documentação.
+                </div>
+                
+                <div class="example">
+                    <div class="example-title">Estrutura de Projeto:</div>
+                    <div class="code-block">
+app/<br>
+├── __init__.py<br>
+├── models.py       # Modelos de dados<br>
+├── routes.py       # Endpoints da API<br>
+├── auth.py         # Autenticação<br>
+└── database.py     # Conexão DB<br>
+<br>
+tests/<br>
+├── test_models.py<br>
+├── test_routes.py<br>
+<br>
+config.py          # Configurações<br>
+main.py            # Entrada da aplicação
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <strong>📌 Sugestão:</strong> Use frameworks como Flask, FastAPI ou Django. Eles abstraem complexidade e seguem boas práticas.
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>⭐ Habilidades de Desenvolvedor Sênior</h2>
+            <div class="highlights">
+                <div class="highlight-card">
+                    <h4>Debugging Avançado</h4>
+                    <p>Usar debuggers, logs e análise de stack traces</p>
+                </div>
+                <div class="highlight-card">
+                    <h4>Code Review</h4>
+                    <p>Entender código de outros e dar feedback construtivo</p>
+                </div>
+                <div class="highlight-card">
+                    <h4>Refatoração</h4>
+                    <p>Melhorar código existente sem mudar comportamento</p>
+                </div>
+                <div class="highlight-card">
+                    <h4>Comunicação</h4>
+                    <p>Explicar decisões técnicas para não-técnicos</p>
+                </div>
+                <div class="highlight-card">
+                    <h4>Mentorado</h4>
+                    <p>Ajudar desenvolvedores mais juniors a crescer</p>
+                </div>
+                <div class="highlight-card">
+                    <h4>Arquitetura</h4>
+                    <p>Desenhar soluções para problemas complexos</p>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>🎓 Recursos para Continuar Aprendendo</h2>
+            <div class="success-box">
+                <p><strong>Parabéns! Você dominou os conceitos avançados:</strong></p>
+                <ul>
+                    <li>✓ Design Patterns</li>
+                    <li>✓ Testes Unitários</li>
+                    <li>✓ Programação Funcional</li>
+                    <li>✓ Decoradores e Generators</li>
+                    <li>✓ Programação Assíncrona</li>
+                    <li>✓ Otimização e Performance</li>
+                    <li>✓ Arquitetura de Software</li>
+                </ul>
+                
+                <p style="margin-top: 1rem;"><strong>Próximas fronteiras:</strong></p>
+                <ul>
+                    <li>1️⃣ Especialize em uma área (Web, Data Science, ML, etc)</li>
+                    <li>2️⃣ Trabalhe em projetos open source</li>
+                    <li>3️⃣ Leia código de produção de grandes empresas</li>
+                    <li>4️⃣ Estude bancos de dados avançados (NoSQL, distribuídos)</li>
+                    <li>5️⃣ Aprenda DevOps (Docker, Kubernetes, CI/CD)</li>
+                    <li>6️⃣ Explore Machine Learning e IA</li>
+                    <li>7️⃣ Contribua para projetos que admira</li>
+                </ul>
+            </div>
+        </section>
+        
+        <div class="button-group">
+            <a href="programacao-intermediaria.html" class="btn btn-secondary">← Voltar ao Intermediário</a>
+            <a href="#" class="btn btn-secondary">Comunidade de Desenvolvedores</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p><strong>Programação Avançada - Você é um Desenvolvedor Profissional! 🏆</strong></p>
+        <p style="margin-top: 0.5rem; opacity: 0.9;">Você completou a jornada! Agora o céu é o limite. Continue aprendendo, praticando e crescendo!</p>
+        <p style="margin-top: 1.5rem; opacity: 0.8; font-size: 0.9rem;">© 2026 ZyonTech. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script>
+        // Links agora funcionam nativamente, sem necessidade de JavaScript
+    </script>
+</body>
+</html>

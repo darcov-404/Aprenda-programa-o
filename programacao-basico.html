@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programação Básica - Guia Completo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #185FA5;
+            --primary-light: #85B7EB;
+            --primary-dark: #0C447C;
+            --secondary: #639922;
+            --accent: #BA7517;
+            --danger: #E24B4A;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #2c2c2a;
+            --text-gray: #5f5e5a;
+            --border-color: #d3d1c7;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f0f0f0 100%);
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        .intro-box {
+            background: var(--bg-white);
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        section {
+            margin-bottom: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .concept-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .concept-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .concept-card h4 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .code-block {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            color: var(--primary-dark);
+        }
+        
+        .example {
+            background: #f9f9f9;
+            border: 1px dashed var(--border-color);
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border-radius: 6px;
+        }
+        
+        .example-title {
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        a.btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(24, 95, 165, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        a.btn.btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        a.btn.btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(24, 95, 165, 0.3);
+        }
+        
+        a.btn.btn-secondary {
+            background: var(--bg-light);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        a.btn.btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .tips-box {
+            background: #fff3cd;
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        
+        .tips-box strong {
+            color: var(--accent);
+        }
+        
+        .flow-diagram {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .flow-item {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 1rem 1.5rem;
+            margin: 0.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .arrow {
+            display: inline-block;
+            margin: 0 0.5rem;
+            color: var(--text-gray);
+            font-weight: bold;
+        }
+        
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .highlight-card {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(24, 95, 165, 0.2);
+        }
+        
+        .highlight-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight-card p {
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+        
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.1rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🚀 Programação Básica</h1>
+        <p>Comece sua jornada na programação com conceitos fundamentais e práticos</p>
+    </header>
+    
+    <div class="container">
+        <div class="intro-box">
+            <h3>O que você vai aprender?</h3>
+            <p>Neste guia, vamos explorar os conceitos fundamentais de programação que servem de base para qualquer linguagem. Desde variáveis até loops, você entenderá os "blocos de construção" de todo código.</p>
+        </div>
+        
+        <section>
+            <h2>📌 O que é Programação?</h2>
+            <p>Programação é o processo de dar instruções a um computador para realizar tarefas específicas. Um programa é uma sequência de comandos que o computador executa de forma ordenada.</p>
+            
+            <div class="concept-card">
+                <h4>Analogia Simples</h4>
+                <p>Pensar em programação é como escrever uma receita de bolo. Você tem:</p>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li><strong>Ingredientes</strong> = Dados/Variáveis</li>
+                    <li><strong>Passos</strong> = Instruções/Código</li>
+                    <li><strong>Resultado</strong> = Output/Resultado Final</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section>
+            <h2>🔧 Conceitos Fundamentais</h2>
+            
+            <h3>1. Variáveis</h3>
+            <div class="concept-card">
+                <h4>O que é uma variável?</h4>
+                <p>Uma variável é um "container" que armazena um valor. Pense como uma caixa com um nome onde você guarda informações.</p>
+                
+                <div class="example">
+                    <div class="example-title">Exemplo em Python:</div>
+                    <div class="code-block">
+nome = "João"<br>
+idade = 25<br>
+altura = 1.75<br>
+é_programador = True
+                    </div>
+                </div>
+                
+                <p><strong>Tipos de dados comuns:</strong></p>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li><strong>String:</strong> Texto ("João")</li>
+                    <li><strong>Integer:</strong> Número inteiro (25)</li>
+                    <li><strong>Float:</strong> Número decimal (1.75)</li>
+                    <li><strong>Boolean:</strong> Verdadeiro ou Falso (True/False)</li>
+                </ul>
+            </div>
+            
+            <h3>2. Condições (If/Else)</h3>
+            <div class="concept-card">
+                <h4>Como tomar decisões no código?</h4>
+                <p>Condições permitem que o programa execute diferentes ações baseado em situações específicas.</p>
+                
+                <div class="example">
+                    <div class="example-title">Exemplo em Python:</div>
+                    <div class="code-block">
+idade = 18<br>
+<br>
+if idade >= 18:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print("Você é maior de idade")<br>
+else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print("Você é menor de idade")
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <strong>💡 Dica:</strong> Use <code>=</code> para atribuir valores e <code>==</code> para comparar.
+                </div>
+            </div>
+            
+            <h3>3. Loops (Repetição)</h3>
+            <div class="concept-card">
+                <h4>Como repetir uma ação várias vezes?</h4>
+                <p>Loops permitem que você execute o mesmo código múltiplas vezes sem repetir a escrita.</p>
+                
+                <div class="example">
+                    <div class="example-title">Loop While (enquanto):</div>
+                    <div class="code-block">
+contador = 1<br>
+while contador <= 5:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(contador)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;contador = contador + 1
+                    </div>
+                </div>
+                
+                <div class="example">
+                    <div class="example-title">Loop For (para):</div>
+                    <div class="code-block">
+for número in range(1, 6):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(número)
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1rem;"><strong>Quando usar cada um?</strong></p>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li><strong>While:</strong> Quando não sabe quantas vezes vai repetir</li>
+                    <li><strong>For:</strong> Quando sabe o número exato de repetições</li>
+                </ul>
+            </div>
+            
+            <h3>4. Funções</h3>
+            <div class="concept-card">
+                <h4>Como reutilizar código?</h4>
+                <p>Funções são blocos de código que você pode chamar múltiplas vezes. Evitam repetição e deixam o código organizado.</p>
+                
+                <div class="example">
+                    <div class="example-title">Exemplo em Python:</div>
+                    <div class="code-block">
+def saudacao(nome):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Olá, " + nome + "!"<br>
+<br>
+mensagem = saudacao("Maria")<br>
+print(mensagem)
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1rem;"><strong>Partes de uma função:</strong></p>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li><strong>def:</strong> Palavra-chave para criar função</li>
+                    <li><strong>Nome:</strong> Identificador da função</li>
+                    <li><strong>Parâmetros:</strong> Valores que a função recebe</li>
+                    <li><strong>Return:</strong> Valor que a função devolve</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section>
+            <h2>🎯 Fluxo de um Programa</h2>
+            <div class="flow-diagram">
+                <div class="flow-item">Início</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">Entrada de Dados</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">Processamento</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">Saída</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">Fim</div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>💪 Exemplo Prático Completo</h2>
+            <div class="concept-card">
+                <h4>Calculadora de Nota Final</h4>
+                
+                <div class="example">
+                    <div class="example-title">O que o programa faz?</div>
+                    <p>Calcula a média de 3 notas e diz se o aluno passou (nota >= 7).</p>
+                </div>
+                
+                <div class="example">
+                    <div class="example-title">Código em Python:</div>
+                    <div class="code-block">
+def calcular_media(nota1, nota2, nota3):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;media = (nota1 + nota2 + nota3) / 3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return media<br>
+<br>
+def verificar_aprovacao(media):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if media >= 7:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Aprovado!"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Reprovado"<br>
+<br>
+nota1 = 7.5<br>
+nota2 = 8.0<br>
+nota3 = 6.5<br>
+<br>
+media = calcular_media(nota1, nota2, nota3)<br>
+resultado = verificar_aprovacao(media)<br>
+<br>
+print(f"Média: {media}")
+print(resultado)
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>⭐ Boas Práticas</h2>
+            <div class="highlights">
+                <div class="highlight-card">
+                    <h4>Nomes Significativos</h4>
+                    <p>Use nomes que descrevem o que a variável contém: <code>idade</code> em vez de <code>x</code></p>
+                </div>
+                <div class="highlight-card">
+                    <h4>Comentários</h4>
+                    <p>Escreva comentários explicando o "por quê", não o "quê"</p>
+                </div>
+                <div class="highlight-card">
+                    <h4>DRY - Don't Repeat Yourself</h4>
+                    <p>Se repetir código 3+ vezes, coloque em uma função</p>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>🚀 Próximos Passos</h2>
+            <div class="tips-box">
+                <p><strong>Agora que você aprendeu:</strong></p>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li>✓ O que é programação</li>
+                    <li>✓ Variáveis e tipos de dados</li>
+                    <li>✓ Condições (if/else)</li>
+                    <li>✓ Loops (for/while)</li>
+                    <li>✓ Funções</li>
+                </ul>
+                
+                <p style="margin-top: 1rem;"><strong>Recomendamos:</strong></p>
+                <ul style="margin-left: 1.5rem;">
+                    <li>1️⃣ Escolher uma linguagem (Python, JavaScript, Java)</li>
+                    <li>2️⃣ Praticar estes conceitos todos os dias</li>
+                    <li>3️⃣ Criar pequenos projetos pessoais</li>
+                    <li>4️⃣ Aprender sobre estruturas de dados (listas, dicionários)</li>
+                </ul>
+            </div>
+        </section>
+        
+        <div class="button-group">
+            <a href="programacao-intermediaria.html" class="btn btn-primary">Começar a Aprender Agora</a>
+            <a href="#" class="btn btn-secondary">Baixar Guia em PDF</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p><strong>Programação Básica - Seu Primeiro Passo no Código</strong></p>
+        <p style="margin-top: 0.5rem; opacity: 0.9;">Lembre-se: todo expert foi um dia iniciante. Pratique, erre, aprenda e evolua! 💻</p>
+        <p style="margin-top: 1.5rem; opacity: 0.8; font-size: 0.9rem;">© 2026 ZyonTech. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script>
+        // Links agora funcionam nativamente, sem necessidade de JavaScript
+    </script>
+</body>
+</html>
